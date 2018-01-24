@@ -2,7 +2,7 @@
 
     require_once("conexion.php");
 
-    class Consultas{
+    class Consulta{
 
         //atributos
         private $sql;
@@ -10,8 +10,8 @@
         //metodos
         public function __construct(){
 
-            //$this->sql = "SELECT * FROM enteros WHERE id BETWEEN 1 AND 15";
-            $this->sql = "SELECT * FROM enteros";
+            $this->sql = "SELECT * FROM enteros WHERE id BETWEEN 1 AND 3";
+            //$this->sql = "SELECT * FROM enteros";
 
         }
 
