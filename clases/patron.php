@@ -39,9 +39,15 @@
 
             for ($i=0; $i < sizeof($this->patrones); $i++) {
 
-                return $this->compararPatrones($patron,$this->patrones[$i]);
+                if($this->compararPatrones($patron,$this->patrones[$i])){
+
+                    return true;
+
+                }
 
             }
+
+            return false;
 
         }
 
@@ -81,7 +87,6 @@
 
             $posicion = $this->buscarPatron($matriz);
             $this->patrones[$posicion][SUMA] += 1;
-            echo $this->patrones[$posicion][SUMA]."</br>";
 
         }
 
