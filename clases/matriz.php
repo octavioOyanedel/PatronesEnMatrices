@@ -46,7 +46,7 @@
 
                 $this->matriz[$posicion] = $matriz;
 
-            }            
+            }
 
         }
 
