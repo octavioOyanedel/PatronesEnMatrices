@@ -7,12 +7,13 @@
 
         //atributos
         private $matriz;
-        private static $posicion = 0;
+        private static $posicion;
 
         //metodos
         public function __construct(){
 
             $this->matriz = array();
+            Matriz::$posicion = 0;
 
         }
 
@@ -56,6 +57,12 @@
 
             $objMostrar = new Mostrar();
             $objMostrar->verMatriz($this->matriz);
+
+        }
+
+        public function getMatriz(){
+
+            return $this->matriz;
 
         }
 
