@@ -7,7 +7,7 @@
     $objMatriz = new Matriz();
 
     $objEntero->crearMatriz();
-    $objEntero->verMatriz();
+    //$objEntero->verMatriz();
     $objMatriz->crearColeccion($objEntero->getEnteros());
     $objMatriz->verMatriz();
 

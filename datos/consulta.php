@@ -10,7 +10,7 @@
         //metodos
         public function __construct(){
 
-            $this->sql = "SELECT * FROM enteros WHERE id BETWEEN 1 AND 3";
+            $this->sql = "SELECT * FROM enteros WHERE id BETWEEN 1 AND 2";
             //$this->sql = "SELECT * FROM enteros";
 
         }

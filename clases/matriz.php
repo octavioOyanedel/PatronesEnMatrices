@@ -1,11 +1,13 @@
 <?php
 
     require_once("mostrar.php");
+    define("PATRON",4);
 
     class Matriz{
 
         //atributos
         private $matriz;
+        private static $posicion = 0;
 
         //metodos
         public function __construct(){
@@ -18,35 +20,35 @@
 
             for ($i=0; $i < (sizeof($enteros) - 1); $i++) {
 
-                $this->recorrerEnteros($enteros[$i],$enteros[$i+1],$i);
+                $this->recorrerEnteros($enteros[$i],$enteros[$i+1]);
 
             }
 
         }
 
-        public function recorrerEnteros($fila,$filaSiguiente,$posicion){
-
-            $matriz = array();
+        public function recorrerEnteros($fila,$filaSiguiente){
 
             for ($i=0; $i < (sizeof($fila) - 1); $i++) {
 
-                $inicio = 0;
-                $siguiente = 1;
-
-                for ($j=0; $j < (sizeof($fila) - 1); $j++) {
-
-                    $matriz[$j] = $fila[$inicio];
-                    $matriz[$j] = $fila[$siguiente];
-                    $matriz[$j] = $filaSiguiente[$inicio];
-                    $matriz[$j] = $filaSiguiente[$siguiente];
-                    $inicio++;
-                    $siguiente++;
-
-                }
-
-                $this->matriz[$posicion] = $matriz;
+                $this->crearMatriz($fila[$i],$fila[$i+1],$filaSiguiente[$i],$filaSiguiente[$i+1]);
 
             }
+
+        }
+
+        public function crearMatriz($n1,$n2,$n3,$n4){
+
+            $array = array();
+
+            for ($i=0; $i < PATRON; $i++) {
+
+                $indice = $i + 1;
+                $array[$i] = ${"n".$indice};
+
+            }
+
+            $this->matriz[Matriz::$posicion] = $array;
+            Matriz::$posicion++;
 
         }
 
