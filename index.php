@@ -18,9 +18,12 @@
     //$objMatriz->verMatriz();
     $objPatron->crearPatron($objMatriz->getMatriz());
     //echo "MATRIZ PATRONES MAS SUMA</br>";
-    $objPatron->verMatriz();
+    //$objPatron->verMatriz();
     $objUltimo->crearUltimo($objEntero->getEnteros());
     //$objUltimo->verMatriz();
     $objFiltro->crearFiltro($objPatron->getPatron(),$objUltimo->getUltimo());
+    //$objFiltro->verMatriz();
+    $objFiltro->crearSumas($objUltimo->getUltimo());
+    $objFiltro->verColeccion();    
 
 ?>
