@@ -10,8 +10,7 @@
         private $filtros;
         private $sumas;
         private static $posicion;
-        private static $posicionSumaDigito;
-        private static $posicionConteo;
+        private static $posicionSumas;
         private static $posicionSuma;
 
         //metodos
@@ -20,66 +19,71 @@
             $this->filtros = array();
             $this->sumas = array();
             Filtro::$posicion = 0;
-            Filtro::$posicionSumaDigito = 0;
-            Filtro::$posicionConteo = 0;
+            Filtro::$posicionSumas = 0;
             Filtro::$posicionSuma = 0;
+
         }
 
         public function crearSumas($ultimos){
 
-            for ($i=0; $i <sizeof($ultimos) ; $i++) {
+            for ($i=0; $i < sizeof($ultimos) ; $i++) {
 
-                $this->crearConteo($ultimos[$i]);
+                $duo = array();
+
+                $this->crearConteo($duo,$ultimos[$i]);
+
+                $this->sumas[Filtro::$posicionSumas] = $duo;
+                Filtro::$posicionSumas++;
 
             }
 
         }
 
-        public function crearConteo($patron){
-
-            $conteo = array();
+        public function crearConteo(&$duo,$ultimo){
 
             for ($i=0; $i < DUO; $i++) {
 
-                $posicion = $i + 2;
-                $this->crearSumaSumas($posicion,$patron,$conteo);
+                $indice = $i + DUO;
+                $this->crearSuma($duo[$i],$ultimo,$indice);
 
             }
 
-            $this->sumas[Filtro::$posicionSuma] = $conteo;
-            Filtro::$posicionSuma++;
-
         }
 
-        public function crearSumaSumas($posicion,$patron,&$conteo){
+        public function crearSuma(&$duo,$ultimo,$indice){
 
-            $sumaDigito = array();
+            $suma = array();
+            $this->formatoSumas($suma);
 
             for ($i=0; $i < sizeof($this->filtros); $i++) {
 
-                $suma = 0;
+                if($ultimo[0] == $this->filtros[$i][0] && $ultimo[1] == $this->filtros[$i][1]){
 
-                if($patron[0] == $this->filtros[0] && $patron[1] == $this->filtros[1]){
+                $posicion = $this->filtros[$i][$indice];
 
-                    for ($j=0; $j < DIEZ; $j++) {
+                    if($posicion != -1){
 
-                        if ($this->filtros[$posicion] == $j) {
-
-                            $suma = $suma + $this->filtros[4];
-
-                        }
+                        $suma[$posicion] = $suma[$posicion] + $this->filtros[$i][4];
 
                     }
-
-                    $sumaDigito[Filtro::$posicionSumaDigito] = $suma;
-                    Filtro::$posicionSumaDigito++;
 
                 }
 
             }
 
-            $conteo[Filtro::$posicionConteo] = $sumaDigito;
-            Filtro::$posicionConteo++;
+            $duo = $suma;
+
+        }
+
+// NOTE: codigo correcto
+
+        public function formatoSumas(&$suma){
+
+            for ($i=0; $i < DIEZ; $i++) {
+
+                $suma[$i] = 0;
+
+            }
 
         }
 
@@ -124,6 +128,40 @@
 
         }
 
+        public function calcularPromedios(){
+
+            for ($i=0; $i < sizeof($this->sumas); $i++) {
+
+                $this->calcularPromedio($this->sumas[$i]);
+
+            }
+
+        }
+
+        public function calcularPromedio($sumas){
+
+            for ($i=0; $i < sizeof($sumas); $i++) {
+
+                $this->calcularPromedioSuma($sumas[$i]);
+
+            }
+
+        }
+
+        public function calcularPromedioSuma($sumas){
+
+            $suma = 0;
+
+            for ($i=0; $i < sizeof($sumas); $i++) {
+
+                $suma = $suma + $sumas[$i];
+
+            }
+
+            echo floor($suma/10)."</br>";
+
+        }
+
         public function verMatriz(){
 
             $objMostrar = new Mostrar();
@@ -146,6 +184,5 @@
         public function __destruct(){}
 
     }//fin clase
-
 
 ?>
